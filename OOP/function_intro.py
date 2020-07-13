@@ -4,12 +4,12 @@
 #
 # print_something()
 #
-# def print_something_multiply(something, number_of_times):
+# def print_something_multiply(something: str, number_of_times: int = 3) -> str:
 #     string_to_print = something * number_of_times
 #     print(string_to_print)
 #
 #
-# print_something_multiply("woohoo", 3)
+# print_something_multiply("woohoo")
 
 # def addition(number_one, number_two=3):
 #     return number_one + number_two
