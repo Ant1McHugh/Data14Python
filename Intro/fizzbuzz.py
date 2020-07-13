@@ -21,7 +21,7 @@ while not end_point.isnumeric():
     print("Please enter a valid number")
     end_point = input("Choose where to end the cycle\n")
 
-while end_point <= startpoint:
+while end_point <= start_point:
     print("Your end point must be greater than the start point, please try again!")
     end_point = input("Choose where to end the cycle\n")
 
@@ -31,10 +31,10 @@ while not end_point.isnumeric():
 
 for number in range(int(start_point), int(end_point)):
     if number % 3 == 0 and number % 5 == 0:
-        print(str(fizz_input) + str(buzz_input))
+        print(f"{fizz_input}{buzz_input}")
     elif number % 3 == 0:
-        print(str(fizz_input))
+        print(f"{fizz_input}")
     elif number % 5 == 0:
-        print(str(buzz_input))
+        print(f"{buzz_input}")
     else:
         print(number)
