@@ -29,8 +29,10 @@ class Car:
             return "Stationary"
         return self.__start_speed
 
+
 new_car = Car(4, "911", "Porsche", "Automatic")
 
+new_car._set_top_speed(150)
 print(new_car.acceleration(10))
 print(new_car.acceleration(50))
 print(new_car.braking(30))
