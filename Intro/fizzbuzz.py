@@ -4,33 +4,37 @@
 # if divisable by 3, say fizz
 # if divisible by 5, say buzz
 # if divisible by both, say fizzbuzz
-fizzinput = input("Please choose an alternative to Fizz\n")
-buzzinput = input(("Please choose an alternative to Buzz\n"))
 
-while True:
-    try:
-        startpoint = int(input("Choose a starting number\n"))
-    except ValueError:
-        print("That is not a valid number, please try again!")
-        startpoint = int(input("Choose a starting number\n"))
+fizz_input = input("Please choose an alternative to Fizz\n")
 
-while True:
-    try:
-        endpoint = int(input("Choose where to end the cycle\n"))
-    except ValueError:
-        print("That is not a valid number, please try again!")
-        endpoint = int(input("Choose where to end the cycle\n"))
+buzz_input = input("Please choose an alternative to Buzz\n")
 
-while endpoint <= startpoint:
+start_point = input("Choose a starting number\n")
+
+while not start_point.isnumeric():
+    print("Please enter a valid number")
+    start_point = input("Choose a starting number\n")
+
+end_point = input("Choose where to end the cycle\n")
+
+while not end_point.isnumeric():
+    print("Please enter a valid number")
+    end_point = input("Choose where to end the cycle\n")
+
+while end_point <= startpoint:
     print("Your end point must be greater than the start point, please try again!")
-    endpoint = input("Choose where to end the cycle\n")
+    end_point = input("Choose where to end the cycle\n")
 
-for number in range(startpoint, endpoint):
+while not end_point.isnumeric():
+    print("Please enter a valid number")
+    end_point = input("Choose where to end the cycle\n")
+
+for number in range(int(start_point), int(end_point)):
     if number % 3 == 0 and number % 5 == 0:
-        print(str(fizzinput) + str(buzzinput))
+        print(str(fizz_input) + str(buzz_input))
     elif number % 3 == 0:
-        print(str(fizzinput))
+        print(str(fizz_input))
     elif number % 5 == 0:
-        print(str(buzzinput))
+        print(str(buzz_input))
     else:
         print(number)
