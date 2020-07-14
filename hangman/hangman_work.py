@@ -30,7 +30,6 @@ class Game:
         self.brain = Brain()
         self.lives = 10  # Once you hit 0 lives you will lose
         self.view = []
-        print(self.brain.choose_word)
         self.game_board()
         self.guess()
 
@@ -67,27 +66,26 @@ class Game:
                     guess_check = self.brain.letter_check(guessing)
                     for letter_index in guess_check:
                         self.view[letter_index] = guessing.upper()
-                    print(self.view)
 
                     if "_" not in self.view:
                         print("Congratulations, you have won!!")
+                        print(self.view)
                         quit(Game)
 
-                    if guessing in guessing_list:
+                    if guessing.upper() in guessing_list:
                         print("You have already guessed that letter! Try again.")
                         guessing = input("Please guess a letter.\n")
 
-                    elif guessing not in guessing_list and "_" in self.view:
-                        guessing_list.append(guessing)
+                    elif guessing.upper() not in guessing_list and "_" in self.view:
+                        guessing_list.append(guessing.upper())
+                        print(self.view)
                         print("Good job! Keep it going.")
                         guessing = input("Please guess a letter.\n")
 
-
-
                 elif guessing.upper() not in self.brain.choose_word:
                     # This is the result of an incorrect guess
-                    if guessing not in guessing_list:
-                        guessing_list.append(guessing)
+                    if guessing.upper() not in guessing_list:
+                        guessing_list.append(guessing.upper())
                         self.lives -= 1
                         if self.lives != 0:
                             print(f"Unlucky! You have {self.lives} lives remaining.")
@@ -96,7 +94,7 @@ class Game:
                         else:
                             print("You have lost the game!")
                             break
-                    elif guessing in guessing_list:
+                    elif guessing.upper() in guessing_list:
                         print("You have already guessed that letter! Try again.")
                         guessing = input("Please guess a letter.\n")
 
