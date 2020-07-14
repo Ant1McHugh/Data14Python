@@ -46,28 +46,20 @@ class Game:
 
         guessing_list = []
 
-        correct_guess_list = []
-
-        correct_guess_count = 0
-
         guessing = input("Please guess a letter.\n").upper()
-
-        guessing_list.append(guessing)
 
         while self.lives != 0:
 
-            while guessing.isnumeric():
+            if guessing.isnumeric():
                 # This ensures the input is not a number
                 print("That is not a single letter, please try again")
                 guessing = input("Please guess a letter.\n").upper()
-                guessing_list.append(guessing)
 
             while not guessing.isnumeric():
                 # This ensures you only input 1 letter  at a time
                 if len(guessing) != 1:
                     print("That is not a single letter, please try again.")
                     guessing = input("Please guess a letter.\n").upper()
-                    guessing_list.append(guessing)
 
                 elif guessing.upper() in self.brain.choose_word:
                     # This is the result of a correct guess
@@ -76,35 +68,43 @@ class Game:
                     for letter_index in guess_check:
                         self.view[letter_index] = guessing.upper()
                     print(self.view)
-                    if guessing not in correct_guess_list:
-                        correct_guess_count += 1
-                        correct_guess_list.append(guessing)
-                        if "_" in self.view:
-                            print("Good guess! Keep it going.")
-                            guessing = input("Please guess a letter.\n").upper()
-                            guessing_list.append(guessing)
-                        else:
-                            print("Congratulations! You have won!")
-                            break
 
-                    elif guessing in correct_guess_list:
+                    if "_" not in self.view:
+                        print("Congratulations, you have won!!")
+                        quit(Game)
+
+                    if guessing in guessing_list:
                         print("You have already guessed that letter! Try again.")
                         guessing = input("Please guess a letter.\n")
+
+                    elif guessing not in guessing_list and "_" in self.view:
                         guessing_list.append(guessing)
+                        print("Good job! Keep it going.")
+                        guessing = input("Please guess a letter.\n")
 
 
-                    elif guessing.upper() not in self.brain.choose_word:
-                        # This is the result of an incorrect guess
+
+                elif guessing.upper() not in self.brain.choose_word:
+                    # This is the result of an incorrect guess
+                    if guessing not in guessing_list:
+                        guessing_list.append(guessing)
                         self.lives -= 1
                         if self.lives != 0:
                             print(f"Unlucky! You have {self.lives} lives remaining.")
                             guessing = input("Please guess a letter.\n")
-                            guessing_list.append(guessing)
-                        else:
-                            break
 
-        if self.lives == 0:
-            return "You are out of lives. Game Over!"
+                        else:
+                            print("You have lost the game!")
+                            break
+                    elif guessing in guessing_list:
+                        print("You have already guessed that letter! Try again.")
+                        guessing = input("Please guess a letter.\n")
+
+
+
+
+
+
 
 
 hangman = Game()
