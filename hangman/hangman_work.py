@@ -37,7 +37,7 @@ class Game:
         board = "_" * self.brain.word_length()
         for underscore in board:
             self.view.append(underscore)
-        print("Welcome to Hangman! This is your word.")
+        print(f"Welcome to Hangman! Your word has {self.brain.word_length()} letters.")
         print(self.view)
 
     def guess(self):
@@ -69,7 +69,7 @@ class Game:
 
                     if "_" not in self.view:
                         print("Congratulations, you have won!!")
-                        print(self.view)
+                        print(self.brain.choose_word)
                         quit(Game)
 
                     if guessing.upper() in guessing_list:
