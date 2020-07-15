@@ -49,12 +49,12 @@ class Game:
 
         while self.lives != 0:
 
-            if guessing.isnumeric():
+            if not guessing.isalpha():
                 # This ensures the input is not a number
                 print("That is not a single letter, please try again")
                 guessing = input("Please guess a letter.\n").upper()
 
-            while not guessing.isnumeric():
+            while guessing.isalpha():
                 # This ensures you only input 1 letter  at a time
                 if len(guessing) != 1:
                     print("That is not a single letter, please try again.")
