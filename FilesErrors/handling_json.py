@@ -7,11 +7,9 @@ class JsonStore:
         with open(jsonfile_name) as jsonfile:
             film_dict = json.load(jsonfile)
         self.name = film_dict["name"]
-    # def create_instance(self):
-    #
-    #
-    # def store_json(self):
+        self.year = film_dict["year"]
+        self.studio = film_dict["studio"]
 
-film = JsonStore()
+film = JsonStore("film.json")
 
-film.read_json("film.json")
+print(film.name, film.year, film.studio)
