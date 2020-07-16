@@ -14,9 +14,7 @@ def test_letter_score():
 
 
 def test_word_score():
-    assert game_test.word_score() == 5
-    assert game_test.word_score() == 7
-    assert game_test.word_score() == 14
+    assert game_test.word_score("cactus") == 5
 
 
 def test_hand_size():

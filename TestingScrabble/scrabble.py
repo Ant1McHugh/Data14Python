@@ -15,11 +15,14 @@ class ScrabbleGame:
         self.five_point_letters = {"k"}
         self.eight_point_letters = {"j", "x"}
         self.ten_point_letters = {"q", "z"}
+        self.hand = 0 # This regulates the hand size at the start of the game
         self.tiles_in_hand = []
         self.chosen_word = " "
+        self.start_round()
         self.hand_size()
         self.choose_word()
         self.word_score()
+        self.next_round()
 
     def letter_score(self, word):
         # This method finds the score of individual letters in a word
@@ -57,31 +60,50 @@ class ScrabbleGame:
         print(f"Your word score is {word_score}!") # Outputs the word score for user
         return word_score
 
+    def start_round(self):
+        return "Welcome to scrabble!"
+
     def hand_size(self):
-        # This regulates the hand size at the start of the game
-        hand = 0
         # Hand starts at 0 so we know to add into it
-        while hand < 7:
+        while self.hand < 7:
             # Lets us build up the hand til we have 7 in hand
-            tiles = random.choice(self.alphabet)
-            # Takes random letters from alphabet and adds them to hand
-            self.tiles_in_hand.append(tiles)
-            hand += 1
+            self.tiles = random.choice(self.alphabet)  # Takes random letters from alphabet and adds them to hand
+            self.tiles_in_hand.append(self.tiles)
+            self.hand += 1
         print(f"Your tiles are {self.tiles_in_hand}")
-        return hand
+        return self.hand
 
     def choose_word(self):
-        valid_word = False
+        valid_word = False # Lets us run through choose_word until the word is valid
         while not valid_word:
             self.chosen_word = input("Please choose your word.\n")
             used_letters = []
             for letter in self.chosen_word:
                 used_letters.append(letter)
             if used_letters == list(filter(lambda x: x in self.tiles_in_hand, used_letters)):
-                break
+                valid_word = True
             else:
                 self.chosen_word = print("You don't have those tiles.")
         return self.chosen_word
+
+    def next_round(self):
+        for letter in self.chosen_word:
+            if letter in self.tiles_in_hand:
+                self.tiles = random.choice(self.alphabet)
+                self.tiles_in_hand.remove(letter)
+                self.tiles_in_hand.append(self.tiles)
+        go_next = input("Would you like to play the next round?(y/n)\n").lower()
+        if go_next == "y":
+            self.chosen_word = " "
+            self.hand_size()
+            self.choose_word()
+            self.word_score()
+            self.next_round()
+        elif go_next == "n":
+            print("Thanks for the game!")
+        else:
+            print("That is not a valid answer, please try again.")
+            go_next = input("Would you like to play the next round?(y/n)\n").lower()
 
 
 game = ScrabbleGame()
