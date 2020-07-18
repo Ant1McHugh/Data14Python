@@ -11,8 +11,7 @@ class PokeFacts:
         self.ability_list = []
         self.type_list = []
         self.move_list = []
-        self.stat_type_list = []
-        self.stat_number_list = []
+        self.stat_list = []
 
     def ability_names(self):
         # This method will return the name of abilities available to input pokemon
@@ -44,17 +43,16 @@ class PokeFacts:
 
     def base_stats(self):
         stats_file = self.req_response.json()['stats']
-        for stat in stats_file:
-            result = stat['stat']
-            self.stat_type_list.append(result['name'])
-        for number in stats_file:
-            result = number['base_stat']
-            self.stat_number_list.append(result)
-        print(self.stat_type_list)
-        print(self.stat_number_list)
+        for row in stats_file:
+            self.stat_list.append(f"{row['stat']['name']}: {row['base_stat']}")
+        print(self.stat_list)
+
 
 
 
 
 pokemon = PokeFacts('togekiss')
+pokemon.ability_names()
 pokemon.base_stats()
+pokemon.type_names()
+pokemon.pokedex_number()
