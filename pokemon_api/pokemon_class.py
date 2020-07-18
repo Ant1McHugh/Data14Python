@@ -1,17 +1,24 @@
 import requests
-import json
+from json import JSONDecodeError
 from pprint import pprint
 
 class PokeFacts:
 
     def __init__(self, pokemon):
-        self.pokemon_name = pokemon
-        self.address = f"https://pokeapi.co/api/v2/pokemon/{pokemon}/" # API with pokemon name as input
-        self.req_response = requests.get(self.address) # Accesses th api
-        self.ability_list = []
-        self.type_list = []
-        self.move_list = []
-        self.stat_list = []
+        try:
+            self.address = f"https://pokeapi.co/api/v2/pokemon/{pokemon}/" # API with pokemon name as input
+            self.req_response = requests.get(self.address) # Accesses th api
+            self.ability_list = []
+            self.type_list = []
+            self.move_list = []
+            self.stat_list = []
+            self.pokedex_number()
+            self.type_names()
+            self.ability_names()
+            self.base_stats()
+            self.move_names()
+        except JSONDecodeError:
+            print("That is not a pokemon!!")
 
     def ability_names(self):
         # This method will return the name of abilities available to input pokemon
@@ -51,8 +58,4 @@ class PokeFacts:
 
 
 
-pokemon = PokeFacts('togekiss')
-pokemon.ability_names()
-pokemon.base_stats()
-pokemon.type_names()
-pokemon.pokedex_number()
+pokemon = PokeFacts('gengar')
